@@ -36,11 +36,11 @@ export default function Sidebar() {
         boxSizing: "border-box"
       }}
     >
-      <div style={{ textAlign: "center", marginBottom: "24px" }}>
+      <div style={{ textAlign: "center", marginBottom: "2px" }}>
         <img
-          src="/logo.png"
+          src="./src/image/logo.jpeg"
           alt="Logo EduTutor"
-          style={{ width: "80px", height: "auto" }}
+          style={{ width: "150px", height: "auto" }}
         />
       </div>
 

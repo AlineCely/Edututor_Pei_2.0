@@ -1,60 +1,76 @@
 import Pagination from "../Table/Pagination";
 
-interface Profissional {
-  nome: string;
-  disciplina: string;
-  telefone: string;
-  email: string;
-  registro: string;
+interface PEI {
+  estudante: string;
+  escola: string;
+  serie: string;
+  professor: string;
+  status: string;
+  criadoEm: string;
 }
 
-const profissionais: Profissional[] = Array.from({ length: 10 }).map(() => ({
-  nome: "Ana Clara",
-  disciplina: "Informática",
-  telefone: "94 98130-8015",
-  email: "gestor@edututorpei.com.br",
-  registro: "20000"
+const peis: PEI[] = Array.from({ length: 10 }).map(() => ({
+  estudante: "Nome estudante",
+  escola: "Escola Exemplo",
+  serie: "5º Ano",
+  professor: "Professor",
+  status: "Ativo",
+  criadoEm: "14/12/2025"
 }));
 
-export default function ProfissionaisTable() {
+export default function PEITable() {
   return (
     <div
       style={{
         background: "#fff",
         borderRadius: "12px",
-        padding: "16px"
+        padding: "16px",
+        color: "#333",
       }}
     >
       {/* Filtros */}
       <div style={{ display: "flex", gap: "12px", marginBottom: "16px" }}>
         <select style={{ padding: "8px", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#f9f9f9", color: "#555" }}>
-          <option>Selecionar disciplina</option>
-          <option>Informática</option>
-          <option>Psicologia</option>
-          <option>Fonoaudiologia</option>
+          <option>Todos status</option>
+          <option>Ativo</option>
+          <option>Inativo</option>
         </select>
+
+        <input type="date" style={{ padding: "8px", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#f9f9f9", color: "#555" }} />
+        <input type="date" style={{ padding: "8px", borderRadius: "6px", border: "1px solid #ccc", backgroundColor: "#f9f9f9", color: "#555" }} />
       </div>
 
       <table style={{ width: "100%", borderCollapse: "collapse" }}>
         <thead>
-          <tr style={{ borderBottom: "1px solid #eee", textAlign: "left", color: "#555" }}>
-            <th>Profissional</th>
-            <th>Disciplina</th>
-            <th>Telefone</th>
-            <th>Email</th>
-            <th>Registro Profissional</th>
+          <tr style={{ borderBottom: "1px solid #eee", textAlign: "left" }}>
+            <th>Estudante</th>
+            <th>Escola</th>
+            <th>Série/Ano</th>
+            <th>Professor</th>
+            <th>Status</th>
+            <th>Data Criação</th>
             <th>Ação</th>
           </tr>
         </thead>
 
         <tbody>
-          {profissionais.map((p, index) => (
-            <tr key={index} style={{ borderBottom: "1px solid #f1f1f1", color: "#777" }}>
-              <td style={{ padding: "12px" }}>{p.nome}</td>
-              <td>{p.disciplina}</td>
-              <td>{p.telefone}</td>
-              <td>{p.email}</td>
-              <td>{p.registro}</td>
+          {peis.map((p, index) => (
+            <tr key={index} style={{ borderBottom: "1px solid #f1f1f1" }}>
+              <td style={{ padding: "12px" }}>{p.estudante}</td>
+              <td>{p.escola}</td>
+              <td>{p.serie}</td>
+              <td>{p.professor}</td>
+              <td>
+                <span
+                  style={{
+                    color: p.status === "Ativo" ? "#16a34a" : "#dc2626",
+                    fontWeight: 500
+                  }}
+                >
+                  {p.status}
+                </span>
+              </td>
+              <td>{p.criadoEm}</td>
               <div style={{ display: "flex", gap: "8px", marginTop: "6px" }}>
                 <button
                   style={{
