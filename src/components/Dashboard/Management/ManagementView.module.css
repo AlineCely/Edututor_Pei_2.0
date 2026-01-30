@@ -1,25 +1,47 @@
 .container {
-    padding: 1.5rem;
+    padding: 1rem;
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     overflow-y: auto;
     color: inherit;
+    transition: padding 0.3s ease;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 1.5rem;
+    }
 }
 
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1.5rem;
+    }
 }
 
 .title {
-    font-size: 1.875rem;
+    font-size: 1.375rem;
     font-weight: 800;
     color: #0f172a;
     letter-spacing: -0.025em;
-    transition: color 0.3s;
+    transition: color 0.3s, font-size 0.3s;
+}
+
+@media (min-width: 768px) {
+    .title {
+        font-size: 1.875rem;
+    }
 }
 
 :global(.dark) .title {
@@ -28,9 +50,10 @@
 
 .subtitle {
     color: #64748b;
-    font-size: 0.875rem;
+    font-size: 0.825rem;
     margin-top: 0.25rem;
 }
+
 
 :global(.dark) .subtitle {
     color: #94a3b8;
@@ -42,6 +65,13 @@
     gap: 0.5rem;
     border-bottom: 1px solid #e2e8f0;
     padding-bottom: 1px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.tabsContainer::-webkit-scrollbar {
+    display: none;
 }
 
 :global(.dark) .tabsContainer {
@@ -49,7 +79,7 @@
 }
 
 .tab {
-    padding: 0.75rem 1.25rem;
+    padding: 0.75rem 1rem;
     font-weight: 600;
     color: #64748b;
     border-bottom: 2px solid transparent;
@@ -58,6 +88,15 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    white-space: nowrap;
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .tab {
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+    }
 }
 
 :global(.dark) .tab {
@@ -94,21 +133,34 @@
 
 .toolbar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     margin-bottom: 1.5rem;
     gap: 1rem;
 }
 
+@media (min-width: 768px) {
+    .toolbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
 .searchGroup {
     position: relative;
-    flex: 1;
-    max-width: 400px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .searchGroup {
+        max-width: 400px;
+    }
 }
 
 .newButton {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     background-color: #14396D;
     color: white;
@@ -118,6 +170,13 @@
     font-size: 0.875rem;
     transition: all 0.2s;
     box-shadow: 0 4px 6px -1px rgba(20, 57, 109, 0.2);
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .newButton {
+        width: auto;
+    }
 }
 
 .newButton:hover {
@@ -129,12 +188,18 @@
 /* Form Styles Override/Additions */
 .formContainer {
     background-color: white;
-    padding: 2rem;
+    padding: 1.25rem;
     border-radius: 1rem;
     border: 1px solid #e2e8f0;
     max-width: 800px;
     margin: 0 auto;
     transition: background-color 0.3s, border-color 0.3s;
+}
+
+@media (min-width: 768px) {
+    .formContainer {
+        padding: 2rem;
+    }
 }
 
 :global(.dark) .formContainer {
@@ -144,11 +209,17 @@
 }
 
 .sectionTitle {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-weight: 700;
     color: #0f172a;
     margin-bottom: 1.5rem;
     transition: color 0.3s;
+}
+
+@media (min-width: 768px) {
+    .sectionTitle {
+        font-size: 1.25rem;
+    }
 }
 
 :global(.dark) .sectionTitle {
@@ -206,11 +277,18 @@
 
 .actions {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column-reverse;
     gap: 1rem;
     margin-top: 2rem;
     padding-top: 1.5rem;
     border-top: 1px solid #f1f5f9;
+}
+
+@media (min-width: 768px) {
+    .actions {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
 }
 
 :global(.dark) .actions {
@@ -225,6 +303,13 @@
     background: white;
     border: 1px solid #e2e8f0;
     transition: all 0.3s;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .cancelButton {
+        width: auto;
+    }
 }
 
 :global(.dark) .cancelButton {
@@ -243,4 +328,11 @@
     font-weight: 600;
     color: white;
     background: #14396D;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .saveButton {
+        width: auto;
+    }
 }

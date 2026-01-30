@@ -1,113 +1,124 @@
 import { useState } from 'react';
-import { Search, Plus } from 'lucide-react';
-import styles from '../SettingsView.module.css';
+import { Search, Plus, X } from 'lucide-react';
 
 export const UsersTab = () => {
     const [isCreating, setIsCreating] = useState(false);
 
     if (isCreating) {
         return (
-            <div className={`animate-in fade-in slide-in-from-right-4 duration-300 ${styles.formContainer}`}>
-                <div className="flex justify-between items-center mb-6">
-                    <h2 className={styles.sectionTitle}>Novo Usuário</h2>
-                    <button onClick={() => setIsCreating(false)} className="text-slate-400 hover:text-slate-600">×</button>
+            <div className="animate-in fade-in slide-in-from-right-4 duration-500 space-y-8">
+                <div className="flex justify-between items-center">
+                    <div>
+                        <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight italic">Novo <span className="text-primary">Usuário</span></h2>
+                        <p className="text-xs font-medium text-slate-500">Cadastre um novo membro na plataforma</p>
+                    </div>
+                    <button onClick={() => setIsCreating(false)} className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900 hover:bg-red-50 hover:text-red-500 dark:hover:bg-red-500/10 transition-all">
+                        <X size={20} />
+                    </button>
                 </div>
 
-                <div className={styles.grid}>
-                    <div className={`${styles.formGroup} ${styles.fullWidth}`}>
-                        <label className={styles.label}>Nome Completo <span className="text-red-500">*</span></label>
-                        <input type="text" className={styles.input} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2 md:col-span-2">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Nome Completo</label>
+                        <input type="text" className="w-full bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 text-sm font-bold focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none" placeholder="Ex: João Silva" />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Email <span className="text-red-500">*</span></label>
-                        <input type="email" className={styles.input} />
+                    <div className="space-y-2">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">E-mail Corporativo</label>
+                        <input type="email" className="w-full bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 text-sm font-bold focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none" placeholder="joao@escola.com" />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Senha <span className="text-red-500">*</span></label>
-                        <input type="password" className={styles.input} />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Tipo <span className="text-red-500">*</span></label>
-                        <select className={styles.select}>
+                    <div className="space-y-2">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Tipo de Acesso</label>
+                        <select className="w-full bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 text-sm font-bold focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none appearance-none">
                             <option>Profissional</option>
                             <option>Administrador</option>
                             <option>Tutor</option>
                         </select>
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Especialidade</label>
-                        <input type="text" className={styles.input} />
+                    <div className="space-y-2">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Senha Inicial</label>
+                        <input type="password" className="w-full bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 text-sm font-bold focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none" placeholder="••••••••" />
                     </div>
 
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Nível de Permissão <span className="text-red-500">*</span></label>
-                        <select className={styles.select}>
-                            <option>Administrativo</option>
-                            <option>Operacional</option>
-                            <option>Visualização</option>
-                        </select>
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Telefone</label>
-                        <input type="tel" className={styles.input} />
-                    </div>
-
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Escola</label>
-                        <select className={styles.select}>
-                            <option>Selecione uma escola</option>
-                            <option>Escola Municipal Exemplo</option>
+                    <div className="space-y-2">
+                        <label className="text-xs font-black text-slate-400 uppercase tracking-widest ml-1">Unidade Escolar</label>
+                        <select className="w-full bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-slate-100 dark:border-slate-800 rounded-2xl px-5 py-4 text-sm font-bold focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all outline-none appearance-none">
+                            <option>Selecione uma escola...</option>
+                            <option>Escola Municipal Paulo Freire</option>
+                            <option>Colégio Estadual Santos Dumont</option>
                         </select>
                     </div>
                 </div>
 
-                <div className={styles.actions}>
-                    <button onClick={() => setIsCreating(false)} className={styles.cancelButton}>Cancelar</button>
-                    <button className={styles.saveButton}>Salvar Usuário</button>
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-slate-50 dark:border-slate-800">
+                    <button onClick={() => setIsCreating(false)} className="flex-1 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest text-slate-500 hover:bg-slate-50 dark:hover:bg-white/5 transition-all">Descartar</button>
+                    <button className="flex-1 px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest bg-primary text-white shadow-lg shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all">Finalizar Cadastro</button>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="animate-in fade-in slide-in-from-left-4 duration-300">
-            <div className={styles.toolbar}>
-                <div className={styles.searchGroup}>
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+        <div className="animate-in fade-in slide-in-from-left-4 duration-500 space-y-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div className="relative w-full sm:max-w-md group">
+                    <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors" size={20} />
                     <input
                         type="text"
-                        placeholder="Buscar usuários..."
-                        className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all"
+                        placeholder="Pesquisar por nome ou e-mail..."
+                        className="w-full pl-12 pr-4 py-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-transparent focus:border-primary/20 focus:bg-white dark:focus:bg-slate-900 transition-all outline-none text-sm font-bold"
                     />
                 </div>
-                <button onClick={() => setIsCreating(true)} className={styles.newButton}>
-                    <Plus size={18} />
+                <button
+                    onClick={() => setIsCreating(true)}
+                    className="w-full sm:w-auto flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-black text-xs uppercase tracking-widest hover:scale-[1.05] active:scale-[0.95] transition-all shadow-xl shadow-black/10"
+                >
+                    <Plus size={18} strokeWidth={3} />
                     Novo Usuário
                 </button>
             </div>
 
-            <div className="bg-white rounded-xl border border-slate-100 overflow-hidden">
-                <table className="w-full text-sm text-left">
-                    <thead className="bg-slate-50 text-slate-500 font-medium border-b border-slate-100">
+            <div className="overflow-x-auto rounded-[2rem] border-[1.5px] border-slate-100 dark:border-slate-800">
+                <table className="w-full text-sm text-left border-collapse">
+                    <thead className="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-800">
                         <tr>
-                            <th className="px-6 py-4">Nome</th>
-                            <th className="px-6 py-4">Email</th>
-                            <th className="px-6 py-4">Tipo</th>
-                            <th className="px-6 py-4">Status</th>
+                            <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Usuário</th>
+                            <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Permissão</th>
+                            <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Ações</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100">
-                        <tr className="hover:bg-slate-50">
-                            <td className="px-6 py-4 font-medium text-slate-800">Admin Principal</td>
-                            <td className="px-6 py-4 text-slate-500">admin@edututor.com</td>
-                            <td className="px-6 py-4"><span className="px-2 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Admin</span></td>
-                            <td className="px-6 py-4"><span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">Ativo</span></td>
-                        </tr>
+                    <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
+                        {[
+                            { name: 'Admin Principal', email: 'admin@edututor.com', role: 'Admin', status: 'Ativo' },
+                            { name: 'Stella Karolina', email: 'stella@escola.com', role: 'Tutor', status: 'Ativo' },
+                            { name: 'João Professor', email: 'joao@escola.com', role: 'Profissional', status: 'Inativo' },
+                        ].map((user, i) => (
+                            <tr key={i} className="group hover:bg-slate-50/50 dark:hover:bg-white/[0.02] transition-colors">
+                                <td className="px-8 py-6">
+                                    <div className="flex items-center gap-4">
+                                        <div className="size-10 rounded-xl bg-slate-900 dark:bg-white/10 flex items-center justify-center text-white font-black text-sm">
+                                            {user.name.charAt(0)}
+                                        </div>
+                                        <div>
+                                            <p className="font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">{user.name}</p>
+                                            <p className="text-xs text-slate-400 font-medium">{user.email}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td className="px-8 py-6">
+                                    <span className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest ${user.role === 'Admin' ? 'bg-purple-100 text-purple-600' :
+                                        user.role === 'Tutor' ? 'bg-blue-100 text-blue-600' : 'bg-slate-100 text-slate-600'
+                                        }`}>
+                                        {user.role}
+                                    </span>
+                                </td>
+                                <td className="px-8 py-6 text-right">
+                                    <button className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">Gerenciar</button>
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

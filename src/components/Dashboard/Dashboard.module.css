@@ -6,7 +6,6 @@
   overflow: hidden;
   transition: background-color 0.3s ease;
   flex-direction: column;
-  /* Mobile first: column layout if needed, or stick to flex row and overlay */
 }
 
 @media (min-width: 1024px) {
@@ -24,10 +23,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.75rem 1.25rem;
   background-color: white;
   border-bottom: 1px solid #f1f5f9;
   z-index: 60;
+  height: 64px;
 }
 
 :global(.dark) .mobileHeader {
@@ -42,12 +42,12 @@
 }
 
 .sidebar {
-  width: 300px;
+  width: 280px;
   background-color: white;
   border-right: 1px solid #f1f5f9;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
   z-index: 100;
 
   /* Mobile: Fixed and hidden by default */
@@ -67,6 +67,13 @@
     position: relative;
     transform: none;
     display: flex;
+    width: 260px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .sidebar {
+    width: 300px;
   }
 }
 
@@ -79,11 +86,12 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
   z-index: 90;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s ease;
 }
 
 .overlayVisible {
@@ -103,19 +111,32 @@
 
 .mainContent {
   flex: 1;
-  padding: 1.5rem;
+  padding: 1rem;
   overflow-y: auto;
   position: relative;
   width: 100%;
+  transition: padding 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .mainContent {
+    padding: 1.5rem;
+  }
 }
 
 @media (min-width: 768px) {
   .mainContent {
-    padding: 2.5rem;
+    padding: 2rem 2.5rem;
   }
 }
 
 @media (min-width: 1024px) {
+  .mainContent {
+    padding: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
   .mainContent {
     padding: 3.5rem 5rem;
   }
@@ -123,7 +144,7 @@
 
 /* Scrollbar Styling */
 .mainContent::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 .mainContent::-webkit-scrollbar-track {

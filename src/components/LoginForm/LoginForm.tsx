@@ -14,6 +14,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
   const [error, setError] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,8 +28,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
       });
 
       if (authError) {
-        setError(authError.message === 'Invalid login credentials' 
-          ? 'E-mail ou senha incorretos.' 
+        setError(authError.message === 'Invalid login credentials'
+          ? 'E-mail ou senha incorretos.'
           : authError.message
         );
       }
@@ -47,7 +48,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
           {error}
         </div>
       )}
-      
+
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.fieldGroup}>
           <label className={styles.label}>E-mail Institucional</label>
@@ -67,8 +68,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
         <div className={styles.fieldGroup}>
           <div className={styles.labelRow}>
             <label className={styles.label}>Senha de Acesso</label>
-            <button 
-              type="button" 
+            <button
+              type="button"
               onClick={onForgotPassword}
               className={styles.forgotLink}
             >
@@ -93,6 +94,18 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </button>
           </div>
+        </div>
+
+        <div className={styles.rememberRow}>
+          <label className={styles.checkboxLabel}>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className={styles.checkbox}
+            />
+            <span className="ml-2">Lembrar por 30 dias</span>
+          </label>
         </div>
 
         <button disabled={isLoading} type="submit" className={styles.submitBtn}>

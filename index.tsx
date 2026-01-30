@@ -6,6 +6,8 @@ import "./styles/App.module.css";
 
 
 
+import { ErrorBoundary } from './src/components/Erro/ErrorBoundary'
+
 const rootElement = document.getElementById('root')
 
 if (!rootElement) {
@@ -14,6 +16,8 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </StrictMode>
 )

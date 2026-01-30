@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Moon, Sun, Bell } from 'lucide-react';
-import styles from '../SettingsView.module.css';
 
 export const SystemTab = () => {
-    // Basic dark mode implementation: toggles 'dark' class on html element
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [notifications, setNotifications] = useState(true);
 
     useEffect(() => {
-        // Check initial state
         if (document.documentElement.classList.contains('dark')) {
             setIsDarkMode(true);
         }
@@ -25,61 +22,66 @@ export const SystemTab = () => {
     };
 
     return (
-        <div className="animate-in fade-in slide-in-from-left-4 duration-300 max-w-2xl">
-            <h2 className={styles.sectionTitle}>Informações do Sistema</h2>
-            <div className={styles.infoCard}>
-                <div className={styles.infoRow}>
-                    <span className={styles.infoLabel}>Versão</span>
-                    <span className={styles.infoValue}>1.0.0</span>
-                </div>
-                <div className={styles.infoRow}>
-                    <span className={styles.infoLabel}>Ambiente</span>
-                    <span className="px-2 py-0.5 bg-green-100 text-green-700 rounded text-xs font-bold uppercase">Produção</span>
-                </div>
-                <div className={styles.infoRow}>
-                    <span className={styles.infoLabel}>Última atualização</span>
-                    <span className={styles.infoValue}>28/01/2026</span>
-                </div>
-            </div>
-
-            <h2 className={styles.sectionTitle}>Preferências</h2>
-            <div className={styles.infoCard}>
-                <div className="flex items-center justify-between py-4 border-b border-slate-100 last:border-0 hover:bg-slate-50 rounded px-2 transition-colors">
-                    <div className="flex items-center gap-4">
-                        <div className={`p-2 rounded-lg ${isDarkMode ? 'bg-indigo-100 text-indigo-600' : 'bg-orange-100 text-orange-600'}`}>
-                            {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
-                        </div>
-                        <div>
-                            <p className="font-bold text-slate-800">Modo Escuro</p>
-                            <p className="text-sm text-slate-500">Alternar entre tema claro e escuro</p>
-                        </div>
-                    </div>
-                    <button
-                        onClick={toggleDarkMode}
-                        className={`w-12 h-6 rounded-full transition-colors relative ${isDarkMode ? 'bg-indigo-600' : 'bg-slate-200'}`}
-                    >
-                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${isDarkMode ? 'left-7' : 'left-1'}`} />
-                    </button>
+        <div className="animate-in fade-in slide-in-from-left-4 duration-500 max-w-4xl space-y-12">
+            <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                    <h2 className="text-xl font-black text-slate-800 dark:text-white tracking-tight italic">Informações do <span className="text-primary">Sistema</span></h2>
+                    <div className="h-px flex-1 bg-slate-100 dark:bg-slate-700" />
                 </div>
 
-                <div className="flex items-center justify-between py-4 border-b border-slate-100 last:border-0 hover:bg-slate-50 rounded px-2 transition-colors">
-                    <div className="flex items-center gap-4">
-                        <div className="p-2 rounded-lg bg-blue-100 text-blue-600">
-                            <Bell size={20} />
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    {[
+                        { label: 'Versão Atual', value: '2.4.0', status: 'Estável' },
+                        { label: 'Ambiente', value: 'Produção', status: 'Online' },
+                        { label: 'Sincronização', value: 'Ativa', status: '100%' }
+                    ].map((item, i) => (
+                        <div key={i} className="p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-transparent hover:border-primary/20 transition-all group">
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">{item.label}</p>
+                            <p className="text-xl font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">{item.value}</p>
+                            <span className="mt-3 inline-block px-2 py-0.5 bg-success/10 text-success text-[9px] font-black uppercase tracking-widest rounded-full">{item.status}</span>
                         </div>
-                        <div>
-                            <p className="font-bold text-slate-800">Som de notificações</p>
-                            <p className="text-sm text-slate-500">Tocar som ao receber alertas</p>
+                    ))}
+                </div>
+            </section>
+
+            <section className="space-y-6">
+                <div className="flex items-center gap-3">
+                    <h2 className="text-xl font-black text-slate-800 dark:text-white tracking-tight italic">Preferências de <span className="text-primary">Interface</span></h2>
+                    <div className="h-px flex-1 bg-slate-100 dark:bg-slate-700" />
+                </div>
+
+                <div className="space-y-4">
+                    <div className="flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-transparent hover:border-primary/20 transition-all cursor-pointer group" onClick={toggleDarkMode}>
+                        <div className="flex items-center gap-5">
+                            <div className={`size-14 rounded-2xl flex items-center justify-center transition-all ${isDarkMode ? 'bg-indigo-500 text-white shadow-lg shadow-indigo-500/20' : 'bg-amber-100 text-amber-600 shadow-inner'}`}>
+                                {isDarkMode ? <Moon size={24} strokeWidth={2.5} /> : <Sun size={24} strokeWidth={2.5} />}
+                            </div>
+                            <div>
+                                <p className="font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">Modo Escuro (Dark Mode)</p>
+                                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Otimize a visualização para ambientes de baixa luminosidade</p>
+                            </div>
+                        </div>
+                        <div className={`w-14 h-7 rounded-full p-1 transition-all duration-300 ${isDarkMode ? 'bg-primary' : 'bg-slate-200 dark:bg-slate-800'}`}>
+                            <div className={`size-5 bg-white rounded-full shadow-md transition-all duration-300 ${isDarkMode ? 'translate-x-7' : 'translate-x-0'}`} />
                         </div>
                     </div>
-                    <button
-                        onClick={() => setNotifications(!notifications)}
-                        className={`w-12 h-6 rounded-full transition-colors relative ${notifications ? 'bg-indigo-600' : 'bg-slate-200'}`}
-                    >
-                        <span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform ${notifications ? 'left-7' : 'left-1'}`} />
-                    </button>
+
+                    <div className="flex items-center justify-between p-6 rounded-[2rem] bg-slate-50 dark:bg-slate-900/50 border-[1.5px] border-transparent hover:border-primary/20 transition-all cursor-pointer group" onClick={() => setNotifications(!notifications)}>
+                        <div className="flex items-center gap-5">
+                            <div className={`size-14 rounded-2xl flex items-center justify-center transition-all ${notifications ? 'bg-primary text-white shadow-lg shadow-primary-500/20' : 'bg-slate-100 text-slate-400 shadow-inner'}`}>
+                                <Bell size={24} strokeWidth={2.5} />
+                            </div>
+                            <div>
+                                <p className="font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">Notificações Sonoras</p>
+                                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">Ative alertas auditivos para eventos críticos e agendamentos</p>
+                            </div>
+                        </div>
+                        <div className={`w-14 h-7 rounded-full p-1 transition-all duration-300 ${notifications ? 'bg-primary' : 'bg-slate-200 dark:bg-slate-800'}`}>
+                            <div className={`size-5 bg-white rounded-full shadow-md transition-all duration-300 ${notifications ? 'translate-x-7' : 'translate-x-0'}`} />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };

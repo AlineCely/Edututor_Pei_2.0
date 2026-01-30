@@ -6,8 +6,6 @@ import { Logo } from "./src/components/Logo"
 import styles from "./styles/App.module.css";
 import { supabase } from "./src/lib/supabase";
 import { useEffect, useState } from 'react'
-import VisualBanner from "@/components/MarketingSection/MarketingSection";
-
 import MarketingSection from "@/components/MarketingSection/MarketingSection";
 
 
@@ -19,6 +17,11 @@ const App: React.FC = () => {
   const [view, setView] = useState<View>('login');
   const [user, setUser] = useState<any>(null);
   const [loadingAuth, setLoadingAuth] = useState(true);
+  const [simulateError, setSimulateError] = useState(false);
+
+  if (simulateError) {
+    throw new Error("Simulação de Erro para Teste do ErrorBoundary");
+  }
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -48,7 +51,7 @@ const App: React.FC = () => {
       <div className="h-screen w-screen flex items-center justify-center bg-white">
         <div className="flex flex-col items-center gap-4">
           <div className="size-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
-          <span className="font-black text-primary text-xs uppercase tracking-widest">
+          <span className="font-black text-primary text-[10px] uppercase tracking-widest">
             Carregando EduTutor...
           </span>
         </div>
@@ -73,10 +76,10 @@ const App: React.FC = () => {
         </header>
 
 
-        <div className="flex flex-col max-w-md mx-auto w-full gap-8 mt-10">
+        <div className="flex flex-col max-w-md mx-auto w-full gap-12 mt-16">
 
           {view === 'login' && (
-            <div className="flex flex-col gap-6"> {/* Espaçamento entre header e form */}
+            <div className="flex flex-col gap-10"> {/* Espaçamento entre header e form */}
               <div className="text-left">
                 <div className={styles.badge}>
                   <span className="size-1.5 rounded-full bg-primary animate-pulse"></span>
@@ -99,7 +102,7 @@ const App: React.FC = () => {
             <ForgotPassword onBack={() => setView('login')} onSuccess={() => setView('reset-password')} />
           )}
 
-          <div className="text-center mt-4">
+          <div className="text-center mt-10">
             <p className="text-slate-400 text-sm font-semibold">
               Ainda não faz parte?{' '}
               <a href="https://instagram.com/edututorpei" className="text-primary font-black underline underline-offset-4">
@@ -115,6 +118,13 @@ const App: React.FC = () => {
           <p className="text-[10px] text-slate-300 font-bold uppercase tracking-[0.2em]">
             © 2026 EduTutor
           </p>
+          {/* Botão de Teste Temporário */}
+          <button
+            onClick={() => setSimulateError(true)}
+            className="mt-4 text-[10px] text-red-300 hover:text-red-500 underline"
+          >
+            [TESTE] Simular Erro
+          </button>
         </footer>
       </main>
 
