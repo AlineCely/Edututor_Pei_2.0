@@ -76,6 +76,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               <div className="animate-in fade-in slide-in-from-left-4 duration-500">
                 <h1 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white tracking-tight">Bem-vindo, EduTutorPei!</h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1">
+
                   <p className="text-slate-500 dark:text-slate-400 text-sm font-medium">Visão geral completa do sistema educacional </p>
                   <span className="hidden sm:block size-1 bg-slate-300 dark:bg-slate-600 rounded-full" />
                   <p className="text-primary dark:text-blue-400 text-xs font-bold bg-primary/5 dark:bg-blue-400/10 px-3 py-1 rounded-full border border-primary/10 dark:border-blue-400/20">
