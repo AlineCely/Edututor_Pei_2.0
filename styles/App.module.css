@@ -5,6 +5,7 @@
   flex-direction: column;
   background-color: #f8fafc;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 @media (min-width: 1024px) {
@@ -18,17 +19,64 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: 2.5rem;
+  padding: 1.5rem;
   position: relative;
   z-index: 10;
   background-color: white;
   border-right: 1px solid #f1f5f9;
+  overflow-y: auto;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  transition: padding 0.3s ease;
+}
+
+.mainPane::-webkit-scrollbar {
+  display: none;
+ 
+}
+
+@media (min-width: 640px) {
+  .mainPane {
+    padding: 2.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
   .mainPane {
-    width: 40%; /* 40% para login/auth */
+    width: 40%;
+    /* 40% for login/auth on desktop */
     padding: 3.5rem 5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .mainPane {
+    width: 35%;
+    padding: 5rem 6rem;
+  }
+}
+
+.marketingPane {
+  display: none;
+  /* Hidden by default on mobile */
+  flex-grow: 1;
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .marketingPane {
+    display: block;
+    /* Visible on desktop */
+    width: 60%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .marketingPane {
+    width: 65%;
   }
 }
 
