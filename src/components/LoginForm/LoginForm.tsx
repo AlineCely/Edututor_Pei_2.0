@@ -68,13 +68,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onForgotPassword }) => {
         <div className={styles.fieldGroup}>
           <div className={styles.labelRow}>
             <label className={styles.label}>Senha de Acesso</label>
-            <button
-              type="button"
-              onClick={onForgotPassword}
-              className={styles.forgotLink}
-            >
-              Esqueci a senha
-            </button>
+
           </div>
           <div className={styles.inputWrapper}>
             <div className={styles.iconLeft}><Lock size={18} /></div>
