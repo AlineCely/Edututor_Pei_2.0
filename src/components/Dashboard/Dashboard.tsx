@@ -33,6 +33,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
     { title: 'Orientações para Escola', patient: 'Aline Cely', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Evolução em autonomia e comunicação verbal', next: 'Alfabetização sólida e escrita do nome' },
     { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Melhora na regulação emocional em grupo', next: 'Independência mediada em 30%' },
     { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Excelente interação com os pares no recreio', next: 'Vocabulário abstrato e conceitos complexos' },
+    { title: 'Plano de Intervenção', patient: 'Pedro Henrique', label: 'Relatório de Inclusão', period: '2025.1', qual: 'Grande avanço na motricidade fina e preensão', next: 'Início da cursiva e redução de apoio' },
+    { title: 'Orientações para Escola', patient: 'Sofia Mendes', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Redução drástica em comportamentos disruptivos', next: 'Integração total em atividades coletivas' },
+    { title: 'Acompanhamento Bimestral', patient: 'Enzo Oliveira', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Identificação plena de cores e formas geométricas', next: 'Conceitos matemáticos básicos (soma)' },
+    { title: 'Orientações para Escola', patient: 'Beatriz Silva', label: 'Relatório de Inclusão', period: '2025.1', qual: 'Melhora na atenção sustentada durante tarefas', next: 'Leitura de palavras dissílabas simples' },
+    { title: 'Relatório Semestral', patient: 'Gustavo Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Desenvolvimento de empatia e compartilhamento', next: 'Liderança mediada em pequenos grupos' },
   ];
 
   useEffect(() => {
@@ -370,50 +375,115 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 </div>
               </div>
 
-              {/* Tabela de Detalhes Dinâmica */}
+              {/* Tabela de Detalhes Dinâmica (Controlada por Paginação) */}
               <div className="p-8 lg:p-12 bg-slate-50/30 dark:bg-slate-900/10 border-t border-slate-50 dark:border-slate-700/50">
-                <div key={reportPage} className="max-w-6xl mx-auto animate-in fade-in slide-in-from-right-4 duration-500">
-                  <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 overflow-hidden">
+                <div className="max-w-6xl mx-auto mb-12">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                    <div className="h-px w-8 bg-slate-200 dark:bg-slate-700"></div>
+                    Relatório em Destaque
+                  </h3>
+                  <div key={reportPage} className="animate-in fade-in slide-in-from-right-4 duration-500">
+                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 overflow-hidden">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left border-collapse min-w-[1000px]">
+                          <thead>
+                            <tr className="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
+                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Orientações / Tag</th>
+                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Paciente</th>
+                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Período</th>
+                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Resultado Qualitativo</th>
+                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Meta Próximo Semestre</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-colors">
+                              <td className="px-8 py-8">
+                                <div className="flex flex-col gap-2">
+                                  <span className="text-sm font-black text-slate-900 dark:text-white italic">{reportsSummary[reportPage].title}</span>
+                                  <span className="px-2.5 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-lg uppercase tracking-widest w-fit">
+                                    {reportsSummary[reportPage].label}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="px-8 py-8 align-top">
+                                <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{reportsSummary[reportPage].patient}</span>
+                              </td>
+                              <td className="px-8 py-8 align-top">
+                                <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{reportsSummary[reportPage].period}</span>
+                              </td>
+                              <td className="px-8 py-8 align-top">
+                                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs italic">
+                                  "{reportsSummary[reportPage].qual}"
+                                </p>
+                              </td>
+                              <td className="px-8 py-8 align-top">
+                                <div className="px-4 py-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl">
+                                  <span className="text-xs font-black text-emerald-700 dark:text-emerald-400 leading-snug block">
+                                    {reportsSummary[reportPage].next}
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Segunda Tabela: Painel Geral de Novos Alunos e Acompanhamento */}
+                <div className="max-w-6xl mx-auto">
+                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
+                    <div className="h-px w-8 bg-slate-200 dark:bg-slate-700"></div>
+                    Acompanhamento de Novos Alunos
+                  </h3>
+                  <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-2xl shadow-slate-200/40 overflow-hidden">
                     <div className="overflow-x-auto">
                       <table className="w-full text-left border-collapse min-w-[1000px]">
                         <thead>
-                          <tr className="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Orientações / Tag</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Paciente</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Período</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Resultado Qualitativo</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Meta Próximo Semestre</th>
+                          <tr className="bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-700">
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Procedimento</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Nome do Paciente</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Ano/Semestre</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Observações Técnicas</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Objetivo Imediato</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-colors">
-                            <td className="px-8 py-8">
-                              <div className="flex flex-col gap-2">
-                                <span className="text-sm font-black text-slate-900 dark:text-white italic">{reportsSummary[reportPage].title}</span>
-                                <span className="px-2.5 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-lg uppercase tracking-widest w-fit">
-                                  {reportsSummary[reportPage].label}
-                                </span>
-                              </div>
-                            </td>
-                            <td className="px-8 py-8 align-top">
-                              <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{reportsSummary[reportPage].patient}</span>
-                            </td>
-                            <td className="px-8 py-8 align-top">
-                              <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{reportsSummary[reportPage].period}</span>
-                            </td>
-                            <td className="px-8 py-8 align-top">
-                              <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs italic">
-                                "{reportsSummary[reportPage].qual}"
-                              </p>
-                            </td>
-                            <td className="px-8 py-8 align-top">
-                              <div className="px-4 py-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl">
-                                <span className="text-xs font-black text-emerald-700 dark:text-emerald-400 leading-snug block">
-                                  {reportsSummary[reportPage].next}
-                                </span>
-                              </div>
-                            </td>
-                          </tr>
+                        <tbody className="divide-y divide-slate-50 dark:divide-slate-700/50">
+                          {reportsSummary.slice(3, 7).map((item, idx) => (
+                            <tr key={idx} className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-all duration-300">
+                              <td className="px-8 py-6">
+                                <div className="flex flex-col gap-1.5">
+                                  <span className="text-[13px] font-bold text-slate-900 dark:text-white uppercase tracking-tight">{item.title}</span>
+                                  <span className="px-2 py-0.5 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[8px] font-black rounded-md uppercase tracking-widest w-fit">
+                                    {item.label}
+                                  </span>
+                                </div>
+                              </td>
+                              <td className="px-8 py-6">
+                                <div className="flex items-center gap-3">
+                                  <div className="size-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-black text-slate-500">
+                                    {item.patient[0]}
+                                  </div>
+                                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{item.patient}</span>
+                                </div>
+                              </td>
+                              <td className="px-8 py-6">
+                                <span className="text-sm font-medium text-slate-500">{item.period}</span>
+                              </td>
+                              <td className="px-8 py-6">
+                                <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug line-clamp-2">
+                                  {item.qual}
+                                </p>
+                              </td>
+                              <td className="px-8 py-6">
+                                <div className="flex items-center gap-2">
+                                  <div className="size-1.5 bg-success rounded-full"></div>
+                                  <span className="text-xs font-bold text-success-dark dark:text-success">{item.next}</span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
