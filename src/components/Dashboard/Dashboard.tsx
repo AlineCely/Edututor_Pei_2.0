@@ -3,7 +3,8 @@ import {
   LogOut, LayoutDashboard, Users, BookOpen,
   Calendar, Bell, Search, Settings, CheckCircle2,
   ChevronRight, TrendingUp, Menu, X, Filter,
-  ArrowUpRight, Clock, MessageSquare, Briefcase
+  ArrowUpRight, Clock, MessageSquare, Briefcase,
+  ChevronLeft, ClipboardList, Lightbulb, Target
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import logoIcon from '@/assets/images/logo_icon_apenas.png';
@@ -244,9 +245,39 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                   </thead>
                   <tbody className="divide-y divide-slate-50 dark:divide-slate-700/50">
                     {[
-                      { name: 'Aline Cely Araujo', id: 'SH-229', period: '2025/2', progress: 85, tags: ['Acadêmica', 'Social'], goals: 'Autonomia diária' },
-                      { name: 'Lucas Gabriel Souza', id: 'SH-312', period: '2025/2', progress: 72, tags: ['Inclusão'], goals: 'Redução mediadores' },
-                      { name: 'Mariana Lima', id: 'SH-105', period: '2025/2', progress: 94, tags: ['Social', 'Linguagem'], goals: 'Interação grupal' },
+                      {
+                        name: 'Aline Cely Araujo',
+                        id: 'SH-229',
+                        period: 'Jul/2025 - Jan/2026',
+                        progress: 85,
+                        tags: ['Acadêmica', 'Social'],
+                        qualitative: 'Demonstrou grande evolução na comunicação verbal e autonomia nas atividades de rotina escolar.',
+                        inclusaoNote: 'Necessário reforçar o apoio visual em atividades de alfabetização.',
+                        nextGoal: 'Consolidar a escrita do próprio nome e letras iniciais.',
+                        goals: 'Autonomia diária'
+                      },
+                      {
+                        name: 'Lucas Gabriel Souza',
+                        id: 'SH-312',
+                        period: 'Ago/2025 - Dez/2025',
+                        progress: 72,
+                        tags: ['Inclusão'],
+                        qualitative: 'Melhorou a regulação emocional em ambientes com estímulos sonoros elevados.',
+                        inclusaoNote: 'Uso de abafadores recomendado em festas e eventos da escola.',
+                        nextGoal: 'Reduzir o tempo de mediação individual em 30%.',
+                        goals: 'Redução mediadores'
+                      },
+                      {
+                        name: 'Mariana Lima',
+                        id: 'SH-105',
+                        period: 'Set/2025 - Jan/2026',
+                        progress: 94,
+                        tags: ['Social', 'Linguagem'],
+                        qualitative: 'Excelente interação com os pares durante os períodos de recreio dirigido.',
+                        inclusaoNote: 'Estimular a liderança em pequenos grupos de trabalho.',
+                        nextGoal: 'Aumentar o vocabulário expressivo em temas abstratos.',
+                        goals: 'Interação grupal'
+                      },
                     ].map((item, i) => (
                       <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-white/[0.01] transition-colors cursor-pointer group">
                         <td className="px-8 py-6">
@@ -267,21 +298,23 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                             ))}
                           </div>
                         </td>
-                        <td className="px-8 py-6">
-                          <div className="flex items-center gap-3">
-                            <div className="flex-1 h-1.5 w-24 bg-slate-100 dark:bg-slate-700 rounded-full overflow-hidden">
-                              <div
-                                className={`h-full rounded-full transition-all duration-1000 ${item.progress > 90 ? 'bg-emerald-500' : 'bg-primary'
-                                  }`}
-                                style={{ width: `${item.progress}%` }}
-                              />
+                        <td className="px-8 py-6 text-xs text-slate-500 font-medium">
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <Target size={12} className="text-emerald-500" />
+                              <span className="text-[10px] uppercase font-black tracking-tight">Meta: {item.nextGoal}</span>
                             </div>
-                            <span className="text-xs font-black text-slate-900 dark:text-white tabular-nums tracking-tighter">{item.progress}%</span>
+                            <div className="flex items-center gap-2">
+                              <ClipboardList size={12} className="text-primary" />
+                              <span className="text-[10px] uppercase font-black tracking-tight">Qualitativo: {item.qualitative.substring(0, 30)}...</span>
+                            </div>
                           </div>
                         </td>
                         <td className="px-8 py-6">
                           <div className="flex items-center justify-between gap-4">
-                            <p className="text-[11px] font-bold text-slate-500 italic max-w-[150px] truncate">{item.goals}</p>
+                            <div className="px-3 py-1 bg-amber-50 dark:bg-amber-500/10 border border-amber-100 dark:border-amber-500/20 rounded-lg">
+                              <span className="text-[9px] font-black text-amber-600 dark:text-amber-400 uppercase">Inclusão: {item.inclusaoNote.substring(0, 20)}...</span>
+                            </div>
                             <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-all">
                               <ChevronRight size={16} className="text-slate-400" />
                             </button>
@@ -292,17 +325,67 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                   </tbody>
                 </table>
               </div>
-              <footer className="p-6 bg-slate-50/30 dark:bg-slate-900/20 flex justify-between items-center px-10 border-t border-slate-50 dark:border-slate-700/50">
-                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Página 1 de 4 • 12 resultados</p>
-                <div className="flex gap-2">
-                  <button className="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-400 hover:text-primary transition-all disabled:opacity-30" disabled>
-                    <ChevronRight size={16} className="rotate-180" />
-                  </button>
-                  <button className="p-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-slate-400 hover:text-primary transition-all">
-                    <ChevronRight size={16} />
-                  </button>
+              <div className="border-t border-slate-50 dark:border-slate-700/50 p-6 flex flex-col gap-6">
+                {/* Pagination Line (Invisible Line Concept - Just fine borders) */}
+                <div className="flex justify-between items-center bg-slate-50/30 dark:bg-slate-900/10 rounded-2xl p-4 border border-slate-100 dark:border-slate-800">
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4].map((page) => (
+                      <button
+                        key={page}
+                        className={`size-8 rounded-lg text-xs font-black transition-all ${page === 1 ? 'bg-primary text-white' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex gap-3">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-400 hover:text-primary transition-all disabled:opacity-30" disabled>
+                      <ChevronLeft size={14} /> Anterior
+                    </button>
+                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-600 dark:text-slate-300 hover:text-primary transition-all shadow-sm">
+                      Próximo <ChevronRight size={14} />
+                    </button>
+                  </div>
                 </div>
-              </footer>
+
+                <div className="flex justify-between items-center px-4">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Página 1 de 4 • 12 resultados</p>
+                  <div className="flex items-center gap-4">
+                    <span className="text-[10px] font-bold text-slate-300 italic">Scroll para mais detalhes →</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider Horizontal Detalhado */}
+              <div className="p-8 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-50 dark:border-slate-700/50">
+                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
+                  {[
+                    { title: 'Orientações para Escola', patient: 'Aline Cely', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Evolução em autonomia', next: 'Alfabetização sólida' },
+                    { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Regulação emocional', next: 'Independência mediada' },
+                    { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Interação social alta', next: 'Vocabulário abstrato' },
+                  ].map((card, idx) => (
+                    <div key={idx} className="min-w-[320px] bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm relative overflow-hidden group hover:border-primary/30 transition-all">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="px-3 py-1 bg-primary/5 text-primary text-[9px] font-black rounded-full uppercase tracking-widest">{card.label}</span>
+                        <Lightbulb size={16} className="text-amber-400 animate-pulse" />
+                      </div>
+                      <h4 className="text-sm font-black text-slate-900 dark:text-white mb-1">{card.title}</h4>
+                      <p className="text-[10px] font-bold text-slate-400 uppercase mb-4">Paciente: {card.patient} • Período: {card.period}</p>
+
+                      <div className="space-y-4">
+                        <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-2xl">
+                          <p className="text-[9px] font-black text-slate-400 uppercase mb-1 tracking-tight">Resultado Qualitativo</p>
+                          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed">{card.qual}</p>
+                        </div>
+                        <div className="p-3 bg-emerald-50/50 dark:bg-emerald-500/5 rounded-2xl border border-emerald-100/50 dark:border-emerald-500/10">
+                          <p className="text-[9px] font-black text-emerald-600 uppercase mb-1 tracking-tight">Meta Próximo Semestre</p>
+                          <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400 leading-relaxed">{card.next}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </section>
           </div>
         );
