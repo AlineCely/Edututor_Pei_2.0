@@ -313,9 +313,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
       {/* Mobile Header Refinado */}
       <div className={styles.mobileHeader}>
         <div className="flex items-center gap-3">
-          <div className="size-11 bg-primary rounded-xl flex items-center justify-center p-1.5 shadow-lg shadow-primary/20">
-            <div className="size-full bg-white rounded-lg flex items-center justify-center p-1">
-              <img src={logoIcon} alt="Logo" className="h-full w-auto object-contain" />
+          <div className="size-14 bg-primary rounded-2xl flex items-center justify-center p-2 shadow-lg shadow-primary/20 transition-transform hover:scale-105">
+            <div className="size-full bg-white rounded-xl flex items-center justify-center p-0.9">
+              <img src={logoIcon} alt="Logo" className="size-full object-contain" />
             </div>
           </div>
           <span className="font-extrabold text-slate-900 dark:text-white tracking-tight uppercase text-xs">EduTutor PEI</span>
@@ -341,9 +341,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             {/* Header Sidebar */}
             <div className="flex items-center justify-between mb-10">
               <div className="flex items-center gap-3">
-                <div className="size-12 rounded-2xl bg-primary flex items-center justify-center p-2 shadow-xl shadow-primary/20">
-                  <div className="size-full bg-white rounded-xl flex items-center justify-center p-1">
-                    <img src={logoIcon} alt="Logo Icon" className="h-full w-auto object-contain" />
+                <div className="size-16 rounded-[1.5rem] bg-primary flex items-center justify-center p-2.5 shadow-xl shadow-primary/20 transition-transform hover:scale-105">
+                  <div className="size-full bg-white rounded-2xl flex items-center justify-center p-0.9">
+                    <img src={logoIcon} alt="Logo Icon" className="size-full object-contain" />
                   </div>
                 </div>
                 <div className="flex flex-col">
