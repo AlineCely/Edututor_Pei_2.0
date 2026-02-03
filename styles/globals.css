@@ -16,7 +16,7 @@
  input,
  textarea,
  select {
-   font-family: sans-serif !important;
+   font-family: 'Inter', !important;
  }
 
  body {
