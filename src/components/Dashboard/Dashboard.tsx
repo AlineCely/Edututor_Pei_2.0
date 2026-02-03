@@ -77,7 +77,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 </h1>
                 <div className="flex items-center gap-3 mt-2">
                   <p className="text-slate-500 dark:text-slate-400 font-medium text-sm">
-                    Sua plataforma está atualizada e pronta.
+                    Visão geral completa do sistema educacional.
                   </p>
                   <span className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></span>
                   <div className="flex items-center gap-2 text-primary dark:text-blue-400 text-xs font-bold bg-primary/5 dark:bg-blue-400/10 px-3 py-1 rounded-full">
@@ -222,8 +222,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               <div className="p-8 border-b border-slate-50 dark:border-slate-700/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div>
                   <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
-                    Relatórios Recentes
-                    <span className="px-2 py-0.5 bg-primary/5 text-primary text-[10px] rounded-md border border-primary/10">Sincronizado</span>
+                    Relatório Semestral de Evolução
+                    <span className="px-2 py-0.5 bg-primary/5 text-primary text-[10px] rounded-md border border-primary/10">Para Família e Convênio</span>
                   </h2>
                   <p className="text-xs text-slate-400 mt-1 font-medium">Acompanhamento semestral de evolução pedagógica</p>
                 </div>
@@ -330,8 +330,177 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 </table>
               </div>
 
+              {/* Paginação Refinada */}
+              <div className="p-8 border-t border-slate-100 dark:border-slate-700/30 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="flex items-center gap-6">
+                  <div className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] flex items-center gap-3">
+                    Página 1 de 4
+                    <span className="size-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></span>
+                    12 Registros
+                  </div>
 
+                  {/* Slider Premium de Navegação */}
+                  <div className="hidden lg:flex items-center gap-4 px-5 py-2.5 bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl border border-slate-100/50 dark:border-slate-800/50">
+                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Acesso Rápido</span>
+                    <div className="relative w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full group/slider">
+                      <div className="absolute top-0 left-0 h-full w-1/4 bg-primary rounded-full shadow-[0_0_12px_rgba(var(--primary-rgb),0.4)]"></div>
+                      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 size-3.5 bg-white dark:bg-slate-800 border-2 border-primary rounded-full shadow-lg shadow-primary/20 cursor-pointer hover:scale-125 transition-all"></div>
+                    </div>
+                    <span className="text-[10px] font-bold text-primary">25%</span>
+                  </div>
+                </div>
 
+                <div className="flex items-center gap-4 p-1.5 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <button className="p-2 text-slate-400 hover:text-primary transition-all disabled:opacity-20 disabled:cursor-not-allowed" disabled>
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3, 4].map((page) => (
+                      <button
+                        key={page}
+                        className={`size-9 rounded-xl flex items-center justify-center text-[10px] font-black transition-all ${page === 1
+                          ? 'bg-primary text-white shadow-xl shadow-primary/30 scale-105'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:text-primary hover:shadow-sm'
+                          }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  <button className="p-2 text-slate-400 hover:text-primary transition-all">
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* Nova Seção: Orientações para Escola */}
+            <section className="bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700/50 shadow-sm overflow-hidden mb-12 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-150">
+              <div className="p-8 border-b border-slate-50 dark:border-slate-700/50 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                  <h2 className="text-xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
+                    Orientações para Escola
+                    <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[10px] rounded-md border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">Relatório de Inclusão</span>
+                  </h2>
+                  <p className="text-xs text-slate-400 mt-1 font-medium">Diretrizes pedagógicas e adaptações curriculares</p>
+                </div>
+                <div className="flex items-center gap-3 w-full md:w-auto">
+                  <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-black text-slate-600 dark:text-slate-400 hover:border-primary transition-all uppercase tracking-widest">
+                    <Filter size={14} /> Filtro
+                  </button>
+                  <button className="flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-2xl text-xs font-black hover:bg-secondary transition-all shadow-lg shadow-primary/20 uppercase tracking-widest">
+                    Como Exportar
+                  </button>
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50/50 dark:bg-slate-900/40">
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Paciente</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Período</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Resultados Qualitativos</th>
+                      <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Metas para Próximo Semestre</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50 dark:divide-slate-700/50">
+                    {[
+                      {
+                        patient: 'Enzo Rodrigues',
+                        period: '2º Semestre 2025',
+                        qualitative: 'Melhora significativa na permanência sentado e engajamento em tarefas coletivas.',
+                        nextGoal: 'Ampliar a interação verbal com colegas durante o lanche.'
+                      },
+                      {
+                        patient: 'Helena Oliveira',
+                        period: '2º Semestre 2025',
+                        qualitative: 'Desenvolveu estratégias de autorregulação eficazes para transições de ambiente.',
+                        nextGoal: 'Introduzir suportes visuais para resolução de problemas matemáticos.'
+                      }
+                    ].map((item, i) => (
+                      <tr key={i} className="hover:bg-slate-50/50 dark:hover:bg-white/[0.01] transition-colors cursor-pointer group">
+                        <td className="px-8 py-6">
+                          <div className="flex items-center gap-4">
+                            <div className="size-10 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center font-black text-emerald-600 text-xs">
+                              {item.patient.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            <span className="text-sm font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">{item.patient}</span>
+                          </div>
+                        </td>
+                        <td className="px-8 py-6 text-xs text-slate-500 dark:text-slate-400 font-bold uppercase tracking-tight">
+                          {item.period}
+                        </td>
+                        <td className="px-8 py-6 max-w-xs">
+                          <p className="text-[11px] leading-relaxed text-slate-600 dark:text-slate-400 font-medium">
+                            {item.qualitative}
+                          </p>
+                        </td>
+                        <td className="px-8 py-6">
+                          <div className="flex items-center justify-between gap-4">
+                            <div className="flex items-center gap-2">
+                              <div className="size-1.5 bg-primary rounded-full"></div>
+                              <span className="text-[11px] font-bold text-slate-700 dark:text-slate-300">{item.nextGoal}</span>
+                            </div>
+                            <button className="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-xl transition-all">
+                              <ChevronRight size={16} className="text-slate-400" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Paginação Refinada para Escola */}
+              <div className="p-8 border-t border-slate-100 dark:border-slate-700/30 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="flex items-center gap-6">
+                  <div className="text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] flex items-center gap-3">
+                    Exibido 1 - de 15
+                    <span className="size-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></span>
+                    Orientações Ativas
+                  </div>
+
+                  {/* Slider Premium de Navegação */}
+                  <div className="hidden lg:flex items-center gap-4 px-5 py-2.5 bg-slate-50/50 dark:bg-slate-900/40 rounded-2xl border border-slate-100/50 dark:border-slate-800/50">
+                    <span className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest">Navegação Rápida</span>
+                    <div className="relative w-32 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full group/slider">
+                      <div className="absolute top-0 left-0 h-full w-[20%] bg-emerald-500 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.4)]"></div>
+                      <div className="absolute top-1/2 left-[20%] -translate-y-1/2 size-3.5 bg-white dark:bg-slate-800 border-2 border-emerald-500 rounded-full shadow-lg shadow-emerald-500/20 cursor-pointer hover:scale-125 transition-all"></div>
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-500">20%</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 p-1.5 bg-slate-50 dark:bg-slate-900/50 rounded-2xl border border-slate-100 dark:border-slate-800">
+                  <button className="p-2 text-slate-400 hover:text-emerald-500 transition-all disabled:opacity-20 disabled:cursor-not-allowed" disabled>
+                    <ChevronLeft size={18} />
+                  </button>
+
+                  <div className="flex items-center gap-1">
+                    {[1, 2, 3].map((page) => (
+                      <button
+                        key={page}
+                        className={`size-9 rounded-xl flex items-center justify-center text-[10px] font-black transition-all ${page === 1
+                          ? 'bg-emerald-500 text-white shadow-xl shadow-emerald-500/30 scale-105'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:text-emerald-500 hover:shadow-sm'
+                          }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                    <span className="px-2 text-slate-300">...</span>
+                    <button className="size-9 rounded-xl flex items-center justify-center text-[10px] font-black text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-all">5</button>
+                  </div>
+
+                  <button className="p-2 text-slate-400 hover:text-emerald-500 transition-all">
+                    <ChevronRight size={18} />
+                  </button>
+                </div>
+              </div>
             </section>
           </div>
         );
