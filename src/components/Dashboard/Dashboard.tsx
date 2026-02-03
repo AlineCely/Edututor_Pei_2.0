@@ -15,6 +15,7 @@ import { SettingsView } from './Settings/SettingsView';
 import { ReportsView } from './Reports/ReportsView';
 
 import styles from './Dashboard.module.css';
+import { div, section } from 'framer-motion/client';
 
 interface DashboardProps {
   user: any;
@@ -378,23 +379,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               {/* Tabela de Detalhes Dinâmica (Controlada por Paginação) */}
               <div className="p-8 lg:p-12 bg-slate-50/30 dark:bg-slate-900/10 border-t border-slate-50 dark:border-slate-700/50">
                 <div className="max-w-6xl mx-auto mb-12">
-                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
-                    <div className="h-px w-8 bg-slate-200 dark:bg-slate-700"></div>
-                    Relatório em Destaque
-                  </h3>
                   <div key={reportPage} className="animate-in fade-in slide-in-from-right-4 duration-500">
                     <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 overflow-hidden">
                       <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse min-w-[1000px]">
-                          <thead>
-                            <tr className="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
-                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Orientações / Tag</th>
-                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Paciente</th>
-                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Período</th>
-                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Resultado Qualitativo</th>
-                              <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Meta Próximo Semestre</th>
-                            </tr>
-                          </thead>
                           <tbody>
                             <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-colors">
                               <td className="px-8 py-8">
@@ -427,65 +415,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                           </tbody>
                         </table>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Segunda Tabela: Painel Geral de Novos Alunos e Acompanhamento */}
-                <div className="max-w-6xl mx-auto">
-                  <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6 flex items-center gap-3">
-                    <div className="h-px w-8 bg-slate-200 dark:bg-slate-700"></div>
-                    Acompanhamento de Novos Alunos
-                  </h3>
-                  <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] border border-slate-100 dark:border-slate-700 shadow-2xl shadow-slate-200/40 overflow-hidden">
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse min-w-[1000px]">
-                        <thead>
-                          <tr className="bg-slate-50/80 dark:bg-slate-900/80 border-b border-slate-100 dark:border-slate-700">
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Procedimento</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Nome do Paciente</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Ano/Semestre</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Observações Técnicas</th>
-                            <th className="px-8 py-5 text-[10px] font-black text-slate-500 uppercase tracking-widest">Objetivo Imediato</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-slate-50 dark:divide-slate-700/50">
-                          {reportsSummary.slice(3, 7).map((item, idx) => (
-                            <tr key={idx} className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-all duration-300">
-                              <td className="px-8 py-6">
-                                <div className="flex flex-col gap-1.5">
-                                  <span className="text-[13px] font-bold text-slate-900 dark:text-white uppercase tracking-tight">{item.title}</span>
-                                  <span className="px-2 py-0.5 bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[8px] font-black rounded-md uppercase tracking-widest w-fit">
-                                    {item.label}
-                                  </span>
-                                </div>
-                              </td>
-                              <td className="px-8 py-6">
-                                <div className="flex items-center gap-3">
-                                  <div className="size-8 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-[10px] font-black text-slate-500">
-                                    {item.patient[0]}
-                                  </div>
-                                  <span className="text-sm font-semibold text-slate-700 dark:text-slate-200">{item.patient}</span>
-                                </div>
-                              </td>
-                              <td className="px-8 py-6">
-                                <span className="text-sm font-medium text-slate-500">{item.period}</span>
-                              </td>
-                              <td className="px-8 py-6">
-                                <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug line-clamp-2">
-                                  {item.qual}
-                                </p>
-                              </td>
-                              <td className="px-8 py-6">
-                                <div className="flex items-center gap-2">
-                                  <div className="size-1.5 bg-success rounded-full"></div>
-                                  <span className="text-xs font-bold text-success-dark dark:text-success">{item.next}</span>
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
                     </div>
                   </div>
                 </div>
