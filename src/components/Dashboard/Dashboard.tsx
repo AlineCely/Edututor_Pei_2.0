@@ -31,7 +31,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [reportPage, setReportPage] = useState(0);
 
   const reportsSummary = [
-    { title: 'Orientações para Escola', patient: 'Aline Cely', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Evolução em autonomia e comunicação verbal', next: 'Alfabetização sólida e escrita do nome' },
     { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Melhora na regulação emocional em grupo', next: 'Independência mediada em 30%' },
     { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Excelente interação com os pares no recreio', next: 'Meta em definição' },
     { title: 'Plano de Intervenção', patient: 'Pedro Henrique', label: 'Relatório de Inclusão', period: '2025.1', qual: 'Grande avanço na motricidade fina e preensão', next: 'Início da cursiva e redução de apoio' },
