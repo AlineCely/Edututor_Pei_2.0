@@ -76,19 +76,19 @@ const App: React.FC = () => {
         </header>
 
 
-        <div className="flex flex-col max-w-md mx-auto w-full gap-12 mt-16">
+        <div className="flex flex-col max-w-md mx-auto w-full gap-16 mt-16">
 
           {view === 'login' && (
-            <div className="flex flex-col gap-10"> {/* Espaçamento entre header e form */}
+            <div className="flex flex-col gap-14"> {/* Espaçamento entre header e form aumentado */}
               <div className="text-left">
                 <div className={styles.badge}>
                   <span className="size-1.5 rounded-full bg-primary animate-pulse"></span>
                   Gestão Multidisciplinar
                 </div>
-                <h1 className=" text-3xl font-black tracking-tight mt-2 text-primary">
+                <h1 className=" text-4xl font-black tracking-tight mt-3 text-primary"> {/* Fonte maior */}
                   Bem-vindo de volta!
                 </h1>
-                <p className="mt-2 text-slate-500 text-sm">
+                <p className="mt-3 text-slate-500 text-base"> {/* Fonte maior e mais espaço */}
                   Potencialize o ensino com nossa plataforma inteligente.
                 </p>
               </div>
