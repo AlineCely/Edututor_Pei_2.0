@@ -46,10 +46,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   };
 
   const stats = [
-    { label: 'Alunos Ativos', value: '32', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50', trend: '+4%' },
+    { label: 'Alunos Ativos', value: '32', icon: Users, color: 'text-blue-600', bg: 'bg-blue-50', trend: 'Total' },
     { label: 'PEIs Concluídos', value: '18', icon: CheckCircle2, color: 'text-emerald-600', bg: 'bg-emerald-50', trend: '+12%' },
-    { label: 'Atendimentos', value: '12', icon: Calendar, color: 'text-violet-600', bg: 'bg-violet-50', trend: 'Hoje' },
-    { label: 'Turmas', value: '08', icon: LayoutDashboard, color: 'text-orange-600', bg: 'bg-orange-50', trend: 'Estável' },
+    { label: 'Atendimentos Hoje', value: '12', icon: Clock, color: 'text-violet-600', bg: 'bg-violet-50', trend: 'Hoje' },
+    { label: 'Média Alunos/Turma', value: '08', icon: LayoutDashboard, color: 'text-orange-600', bg: 'bg-orange-50', trend: 'Estável' },
+    { label: 'Taxa de Ativos', value: '94%', icon: TrendingUp, color: 'text-primary', bg: 'bg-primary/5', trend: 'KPI' },
+    { label: 'Pendência', value: '05', icon: Bell, color: 'text-red-500', bg: 'bg-red-50', trend: 'Atenção' },
   ];
 
   const renderContent = () => {
@@ -103,8 +105,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
               </div>
             </header>
 
-            {/* Grid de Estatísticas Refinado */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {/* Grid de Estatísticas Refinado - Agora com 6 itens */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-12">
               {stats.map((stat, i) => (
                 <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-[2rem] shadow-sm border border-slate-100 dark:border-slate-700/50 hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/20 transition-all group overflow-hidden relative">
                   <div className="flex justify-between items-start mb-4">
