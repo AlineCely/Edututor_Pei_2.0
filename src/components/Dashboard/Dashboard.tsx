@@ -27,6 +27,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [activeView, setActiveView] = useState<ViewState>('dashboard');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [reportPage, setReportPage] = useState(0);
+
+  const reportsSummary = [
+    { title: 'Orientações para Escola', patient: 'Aline Cely', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Evolução em autonomia e comunicação verbal', next: 'Alfabetização sólida e escrita do nome' },
+    { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Melhora na regulação emocional em grupo', next: 'Independência mediada em 30%' },
+    { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Excelente interação com os pares no recreio', next: 'Vocabulário abstrato e conceitos complexos' },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -325,65 +332,102 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                   </tbody>
                 </table>
               </div>
-              <div className="border-t border-slate-50 dark:border-slate-700/50 p-6 flex flex-col gap-6">
-                {/* Pagination Line (Invisible Line Concept - Just fine borders) */}
-                <div className="flex justify-between items-center bg-slate-50/30 dark:bg-slate-900/10 rounded-2xl p-4 border border-slate-100 dark:border-slate-800">
-                  <div className="flex items-center gap-1">
-                    {[1, 2, 3, 4].map((page) => (
-                      <button
-                        key={page}
-                        className={`size-8 rounded-lg text-xs font-black transition-all ${page === 1 ? 'bg-primary text-white' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
-                      >
-                        {page}
-                      </button>
-                    ))}
+              <div className="border-t border-slate-50 dark:border-slate-700/50 p-6">
+                {/* Single Row Pagination and Summary */}
+                <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-50/30 dark:bg-slate-900/10 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-800 gap-4">
+                  <div className="flex items-center gap-4">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Página {reportPage + 1} de {reportsSummary.length} • {reportsSummary.length} resultados</p>
+                    <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
+                    <div className="flex items-center gap-1">
+                      {reportsSummary.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setReportPage(idx)}
+                          className={`size-8 rounded-lg text-xs font-black transition-all ${reportPage === idx ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                        >
+                          {idx + 1}
+                        </button>
+                      ))}
+                    </div>
                   </div>
+
                   <div className="flex gap-3">
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-400 hover:text-primary transition-all disabled:opacity-30" disabled>
+                    <button
+                      onClick={() => setReportPage(prev => Math.max(0, prev - 1))}
+                      disabled={reportPage === 0}
+                      className="flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-400 hover:text-primary transition-all disabled:opacity-30 disabled:hover:text-slate-400"
+                    >
                       <ChevronLeft size={14} /> Anterior
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-600 dark:text-slate-300 hover:text-primary transition-all shadow-sm">
+                    <button
+                      onClick={() => setReportPage(prev => Math.min(reportsSummary.length - 1, prev + 1))}
+                      disabled={reportPage === reportsSummary.length - 1}
+                      className="flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-600 dark:text-slate-300 hover:text-primary transition-all shadow-sm disabled:opacity-30"
+                    >
                       Próximo <ChevronRight size={14} />
                     </button>
                   </div>
                 </div>
-
-                <div className="flex justify-between items-center px-4">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Página 1 de 4 • 12 resultados</p>
-                  <div className="flex items-center gap-4">
-                    <span className="text-[10px] font-bold text-slate-300 italic">Scroll para mais detalhes →</span>
-                  </div>
-                </div>
               </div>
 
-              {/* Slider Horizontal Detalhado */}
-              <div className="p-8 bg-slate-50/50 dark:bg-slate-900/30 border-t border-slate-50 dark:border-slate-700/50">
-                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide">
-                  {[
-                    { title: 'Orientações para Escola', patient: 'Aline Cely', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Evolução em autonomia', next: 'Alfabetização sólida' },
-                    { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Regulação emocional', next: 'Independência mediada' },
-                    { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Interação social alta', next: 'Vocabulário abstrato' },
-                  ].map((card, idx) => (
-                    <div key={idx} className="min-w-[320px] bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-100 dark:border-slate-700 shadow-sm relative overflow-hidden group hover:border-primary/30 transition-all">
-                      <div className="flex items-center justify-between mb-4">
-                        <span className="px-3 py-1 bg-primary/5 text-primary text-[9px] font-black rounded-full uppercase tracking-widest">{card.label}</span>
-                        <Lightbulb size={16} className="text-amber-400 animate-pulse" />
-                      </div>
-                      <h4 className="text-sm font-black text-slate-900 dark:text-white mb-1">{card.title}</h4>
-                      <p className="text-[10px] font-bold text-slate-400 uppercase mb-4">Paciente: {card.patient} • Período: {card.period}</p>
-
-                      <div className="space-y-4">
-                        <div className="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-2xl">
-                          <p className="text-[9px] font-black text-slate-400 uppercase mb-1 tracking-tight">Resultado Qualitativo</p>
-                          <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed">{card.qual}</p>
+              {/* Slider Dinâmico de Detalhes */}
+              <div className="p-8 lg:p-12 bg-slate-50/30 dark:bg-slate-900/10 border-t border-slate-50 dark:border-slate-700/50">
+                <div key={reportPage} className="max-w-4xl mx-auto animate-in fade-in slide-in-from-right-4 duration-500">
+                    <div className="bg-white dark:bg-slate-800 p-8 md:p-10 rounded-[3rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/40 dark:shadow-none relative overflow-hidden group">
+                      <div className="flex items-center justify-between mb-8">
+                        <div className="flex items-center gap-4">
+                          <div className="size-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
+                            <ClipboardList size={28} strokeWidth={2.5} />
+                          </div>
+                          <div>
+                            <span className="px-3 py-1 bg-primary text-white text-[9px] font-black rounded-full uppercase tracking-widest leading-none">{reportsSummary[reportPage].label}</span>
+                            <h4 className="text-xl font-black text-slate-900 dark:text-white mt-2 italic">{reportsSummary[reportPage].title}</h4>
+                          </div>
                         </div>
-                        <div className="p-3 bg-emerald-50/50 dark:bg-emerald-500/5 rounded-2xl border border-emerald-100/50 dark:border-emerald-500/10">
-                          <p className="text-[9px] font-black text-emerald-600 uppercase mb-1 tracking-tight">Meta Próximo Semestre</p>
-                          <p className="text-xs font-medium text-emerald-700 dark:text-emerald-400 leading-relaxed">{card.next}</p>
+                        <div className="flex flex-col items-end">
+                          <div className="flex items-center gap-2 text-amber-500 bg-amber-50 dark:bg-amber-500/10 px-4 py-2 rounded-2xl border border-amber-100 dark:border-amber-500/20">
+                            <Lightbulb size={18} className="animate-pulse" />
+                            <span className="text-[10px] font-black uppercase tracking-widest">Destaque Pedagógico</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Paciente / Aluno</p>
+                          <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl font-bold text-slate-700 dark:text-slate-300">
+                            {reportsSummary[reportPage].patient}
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Período de Avaliação</p>
+                          <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl font-bold text-slate-700 dark:text-slate-300">
+                            {reportsSummary[reportPage].period}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-6">
+                        <div className="p-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
+                          <p className="text-[10px] font-black text-primary uppercase mb-3 tracking-[0.2em] flex items-center gap-2">
+                            <div className="size-1.5 bg-primary rounded-full" />
+                            Resultado Qualitativo
+                          </p>
+                          <p className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                            "{reportsSummary[reportPage].qual}"
+                          </p>
+                        </div>
+                        <div className="p-6 bg-emerald-50/50 dark:bg-emerald-500/5 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20">
+                          <p className="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-[0.2em] flex items-center gap-2">
+                            <div className="size-1.5 bg-emerald-500 rounded-full" />
+                            Meta para Próximo Semestre
+                          </p>
+                          <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400 leading-relaxed">
+                            {reportsSummary[reportPage].next}
+                          </p>
                         </div>
                       </div>
                     </div>
-                  ))}
                 </div>
               </div>
             </section>
