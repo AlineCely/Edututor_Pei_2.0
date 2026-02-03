@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import logoImg from '@/assets/images/edututor_logo.jpeg';
+import logoIcon from '@/assets/images/logo_icon.png';
 import { StudentsView } from './Students/StudentsView';
 import { ManagementView } from './Management/ManagementView';
 import { DisciplineView } from './Discipline/DisciplineView';
@@ -312,8 +313,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
       {/* Mobile Header Refinado */}
       <div className={styles.mobileHeader}>
         <div className="flex items-center gap-3">
-          <div className="size-10 bg-primary/5 rounded-xl flex items-center justify-center p-1.5 border border-primary/10">
-            <img src={logoImg} alt="Logo" className="h-full w-auto object-contain" />
+          <div className="size-11 bg-primary rounded-xl flex items-center justify-center p-1.5 shadow-lg shadow-primary/20">
+            <div className="size-full bg-white rounded-lg flex items-center justify-center p-1">
+              <img src={logoIcon} alt="Logo" className="h-full w-auto object-contain" />
+            </div>
           </div>
           <span className="font-extrabold text-slate-900 dark:text-white tracking-tight uppercase text-xs">EduTutor PEI</span>
         </div>
@@ -338,8 +341,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
             {/* Header Sidebar */}
             <div className="flex items-center justify-between mb-10">
               <div className="flex items-center gap-3">
-                <div className="size-11 rounded-2xl bg-primary flex items-center justify-center p-2 shadow-xl shadow-primary/20">
-                  <img src={logoImg} alt="Logo" className="h-full w-auto brightness-0 invert" />
+                <div className="size-12 rounded-2xl bg-primary flex items-center justify-center p-2 shadow-xl shadow-primary/20">
+                  <div className="size-full bg-white rounded-xl flex items-center justify-center p-1">
+                    <img src={logoIcon} alt="Logo Icon" className="h-full w-auto object-contain" />
+                  </div>
                 </div>
                 <div className="flex flex-col">
                   <span className="font-black text-slate-900 dark:text-white tracking-tighter text-lg leading-tight">EduTutor</span>
