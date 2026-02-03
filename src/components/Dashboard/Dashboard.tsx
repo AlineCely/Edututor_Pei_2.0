@@ -370,64 +370,54 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                 </div>
               </div>
 
-              {/* Slider Dinâmico de Detalhes */}
+              {/* Tabela de Detalhes Dinâmica */}
               <div className="p-8 lg:p-12 bg-slate-50/30 dark:bg-slate-900/10 border-t border-slate-50 dark:border-slate-700/50">
-                <div key={reportPage} className="max-w-4xl mx-auto animate-in fade-in slide-in-from-right-4 duration-500">
-                    <div className="bg-white dark:bg-slate-800 p-8 md:p-10 rounded-[3rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/40 dark:shadow-none relative overflow-hidden group">
-                      <div className="flex items-center justify-between mb-8">
-                        <div className="flex items-center gap-4">
-                          <div className="size-14 rounded-2xl bg-primary/5 flex items-center justify-center text-primary">
-                            <ClipboardList size={28} strokeWidth={2.5} />
-                          </div>
-                          <div>
-                            <span className="px-3 py-1 bg-primary text-white text-[9px] font-black rounded-full uppercase tracking-widest leading-none">{reportsSummary[reportPage].label}</span>
-                            <h4 className="text-xl font-black text-slate-900 dark:text-white mt-2 italic">{reportsSummary[reportPage].title}</h4>
-                          </div>
-                        </div>
-                        <div className="flex flex-col items-end">
-                          <div className="flex items-center gap-2 text-amber-500 bg-amber-50 dark:bg-amber-500/10 px-4 py-2 rounded-2xl border border-amber-100 dark:border-amber-500/20">
-                            <Lightbulb size={18} className="animate-pulse" />
-                            <span className="text-[10px] font-black uppercase tracking-widest">Destaque Pedagógico</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <div className="space-y-1">
-                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Paciente / Aluno</p>
-                          <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl font-bold text-slate-700 dark:text-slate-300">
-                            {reportsSummary[reportPage].patient}
-                          </div>
-                        </div>
-                        <div className="space-y-1">
-                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Período de Avaliação</p>
-                          <div className="p-4 bg-slate-50 dark:bg-slate-900/50 rounded-2xl font-bold text-slate-700 dark:text-slate-300">
-                            {reportsSummary[reportPage].period}
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="space-y-6">
-                        <div className="p-6 bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2.5rem]">
-                          <p className="text-[10px] font-black text-primary uppercase mb-3 tracking-[0.2em] flex items-center gap-2">
-                            <div className="size-1.5 bg-primary rounded-full" />
-                            Resultado Qualitativo
-                          </p>
-                          <p className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed italic">
-                            "{reportsSummary[reportPage].qual}"
-                          </p>
-                        </div>
-                        <div className="p-6 bg-emerald-50/50 dark:bg-emerald-500/5 rounded-[2.5rem] border border-emerald-100 dark:border-emerald-500/20">
-                          <p className="text-[10px] font-black text-emerald-600 uppercase mb-3 tracking-[0.2em] flex items-center gap-2">
-                            <div className="size-1.5 bg-emerald-500 rounded-full" />
-                            Meta para Próximo Semestre
-                          </p>
-                          <p className="text-sm font-bold text-emerald-700 dark:text-emerald-400 leading-relaxed">
-                            {reportsSummary[reportPage].next}
-                          </p>
-                        </div>
-                      </div>
+                <div key={reportPage} className="max-w-6xl mx-auto animate-in fade-in slide-in-from-right-4 duration-500">
+                  <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse min-w-[1000px]">
+                        <thead>
+                          <tr className="bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-100 dark:border-slate-700">
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Orientações / Tag</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Paciente</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Período</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Resultado Qualitativo</th>
+                            <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Meta Próximo Semestre</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-colors">
+                            <td className="px-8 py-8">
+                              <div className="flex flex-col gap-2">
+                                <span className="text-sm font-black text-slate-900 dark:text-white italic">{reportsSummary[reportPage].title}</span>
+                                <span className="px-2.5 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-lg uppercase tracking-widest w-fit">
+                                  {reportsSummary[reportPage].label}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-8 py-8 align-top">
+                              <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{reportsSummary[reportPage].patient}</span>
+                            </td>
+                            <td className="px-8 py-8 align-top">
+                              <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{reportsSummary[reportPage].period}</span>
+                            </td>
+                            <td className="px-8 py-8 align-top">
+                              <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs italic">
+                                "{reportsSummary[reportPage].qual}"
+                              </p>
+                            </td>
+                            <td className="px-8 py-8 align-top">
+                              <div className="px-4 py-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl">
+                                <span className="text-xs font-black text-emerald-700 dark:text-emerald-400 leading-snug block">
+                                  {reportsSummary[reportPage].next}
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
+                  </div>
                 </div>
               </div>
             </section>
