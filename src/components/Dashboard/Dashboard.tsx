@@ -28,17 +28,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
   const [activeView, setActiveView] = useState<ViewState>('dashboard');
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [reportPage, setReportPage] = useState(0);
 
-  const reportsSummary = [
-    { title: 'Orientações para Escola', patient: 'Lucas Gabriel', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Melhora na regulação emocional em grupo', next: 'Independência mediada em 30%' },
-    { title: 'Orientações para Escola', patient: 'Mariana Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Excelente interação com os pares no recreio', next: 'Meta em definição' },
-    { title: 'Plano de Intervenção', patient: 'Pedro Henrique', label: 'Relatório de Inclusão', period: '2025.1', qual: 'Grande avanço na motricidade fina e preensão', next: 'Início da cursiva e redução de apoio' },
-    { title: 'Orientações para Escola', patient: 'Sofia Mendes', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Redução drástica em comportamentos disruptivos', next: 'Integração total em atividades coletivas' },
-    { title: 'Acompanhamento Bimestral', patient: 'Enzo Oliveira', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Identificação plena de cores e formas geométricas', next: 'Conceitos matemáticos básicos (soma)' },
-    { title: 'Orientações para Escola', patient: 'Beatriz Silva', label: 'Relatório de Inclusão', period: '2025.1', qual: 'Melhora na atenção sustentada durante tarefas', next: 'Leitura de palavras dissílabas simples' },
-    { title: 'Relatório Semestral', patient: 'Gustavo Lima', label: 'Relatório de Inclusão', period: '2025.2', qual: 'Desenvolvimento de empatia e compartilhamento', next: 'Liderança mediada em pequenos grupos' },
-  ];
+
+
 
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 1000);
@@ -337,87 +329,9 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout }) => {
                   </tbody>
                 </table>
               </div>
-              <div className="border-t border-slate-50 dark:border-slate-700/50 p-6">
-                {/* Single Row Pagination and Summary */}
-                <div className="flex flex-col sm:flex-row justify-between items-center bg-slate-50/30 dark:bg-slate-900/10 rounded-[2rem] p-4 border border-slate-100 dark:border-slate-800 gap-4">
-                  <div className="flex items-center gap-4">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest whitespace-nowrap">Página {reportPage + 1} de {reportsSummary.length} • {reportsSummary.length} resultados</p>
-                    <div className="h-4 w-px bg-slate-200 dark:bg-slate-700 hidden sm:block"></div>
-                    <div className="flex items-center gap-1">
-                      {reportsSummary.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setReportPage(idx)}
-                          className={`size-8 rounded-lg text-xs font-black transition-all ${reportPage === idx ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'}`}
-                        >
-                          {idx + 1}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
 
-                  <div className="flex gap-3">
-                    <button
-                      onClick={() => setReportPage(prev => Math.max(0, prev - 1))}
-                      disabled={reportPage === 0}
-                      className="flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-400 hover:text-primary transition-all disabled:opacity-30 disabled:hover:text-slate-400"
-                    >
-                      <ChevronLeft size={14} /> Anterior
-                    </button>
-                    <button
-                      onClick={() => setReportPage(prev => Math.min(reportsSummary.length - 1, prev + 1))}
-                      disabled={reportPage === reportsSummary.length - 1}
-                      className="flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-xs font-black text-slate-600 dark:text-slate-300 hover:text-primary transition-all shadow-sm disabled:opacity-30"
-                    >
-                      Próximo <ChevronRight size={14} />
-                    </button>
-                  </div>
-                </div>
-              </div>
 
-              {/* Tabela de Detalhes Dinâmica (Controlada por Paginação) */}
-              <div className="p-8 lg:p-12 bg-slate-50/30 dark:bg-slate-900/10 border-t border-slate-50 dark:border-slate-700/50">
-                <div className="max-w-6xl mx-auto mb-12">
-                  <div key={reportPage} className="animate-in fade-in slide-in-from-right-4 duration-500">
-                    <div className="bg-white dark:bg-slate-800 rounded-[2rem] border border-slate-100 dark:border-slate-700 shadow-xl shadow-slate-200/20 overflow-hidden">
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left border-collapse min-w-[1000px]">
-                          <tbody>
-                            <tr className="group hover:bg-slate-50/50 dark:hover:bg-slate-900/40 transition-colors">
-                              <td className="px-8 py-8">
-                                <div className="flex flex-col gap-2">
-                                  <span className="text-sm font-black text-slate-900 dark:text-white italic">{reportsSummary[reportPage].title}</span>
-                                  <span className="px-2.5 py-1 bg-primary/10 text-primary text-[9px] font-black rounded-lg uppercase tracking-widest w-fit">
-                                    {reportsSummary[reportPage].label}
-                                  </span>
-                                </div>
-                              </td>
-                              <td className="px-8 py-8 align-top">
-                                <span className="text-sm font-bold text-slate-700 dark:text-slate-300">{reportsSummary[reportPage].patient}</span>
-                              </td>
-                              <td className="px-8 py-8 align-top">
-                                <span className="text-sm font-bold text-slate-600 dark:text-slate-400">{reportsSummary[reportPage].period}</span>
-                              </td>
-                              <td className="px-8 py-8 align-top">
-                                <p className="text-xs font-medium text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs italic">
-                                  "{reportsSummary[reportPage].qual}"
-                                </p>
-                              </td>
-                              <td className="px-8 py-8 align-top">
-                                <div className="px-4 py-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-100 dark:border-emerald-500/20 rounded-2xl">
-                                  <span className="text-xs font-black text-emerald-700 dark:text-emerald-400 leading-snug block">
-                                    {reportsSummary[reportPage].next}
-                                  </span>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </section>
           </div>
         );
