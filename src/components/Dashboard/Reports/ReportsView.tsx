@@ -15,13 +15,17 @@ export const ReportsView = () => {
         <div className="animate-in fade-in duration-700 space-y-8">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                 <div className="space-y-1">
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+                    <h1 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">
                         Centro de <span className="text-primary italic">Relatórios</span>
                     </h1>
-                    <p className="text-slate-500 dark:text-slate-400 text-sm font-medium flex items-center gap-2">
-                        <div className="size-2 bg-primary rounded-full animate-pulse" />
-                        Gere documentos oficiais e dados de acompanhamento
-                    </p>
+                    <div className="flex items-center gap-3 mt-2">
+                        <p className="text-slate-500 dark:text-slate-400 text-sm font-medium flex items-center gap-2">
+                            <div className="size-2 bg-primary rounded-full animate-pulse" />
+                            Geração de Documentos Oficiais
+                        </p>
+                        <span className="text-slate-200 dark:text-slate-700">|</span>
+                        <p className="text-slate-400 text-xs font-bold uppercase tracking-widest">Base consolidada</p>
+                    </div>
                 </div>
             </div>
 
